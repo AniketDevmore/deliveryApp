@@ -1,1 +1,7 @@
-{}
+{
+  "userLogin": {
+    "skipLogin": "Skip Login",
+    "loginText": "India's first agro app",
+    "continue": "Continue"
+  }
+}
