@@ -9,7 +9,11 @@ const RootNavigation: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="UserLogin">
-        <Stack.Screen name="UserLogin" component={UserLogin} />
+        <Stack.Screen
+          name="UserLogin"
+          component={UserLogin}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -25,10 +25,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import RootNavigation from './src/navigation/RootNavigation';
+import i18 from 'i18next';
+import {initReactI18next, I18nextProvider, useTranslation} from 'react-i18next';
+import en from './src/shared/localization/en.json';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+// type SectionProps = PropsWithChildren<{
+//   title: string;
+// }>;
 
 // function Section({children, title}: SectionProps): React.JSX.Element {
 //   const isDarkMode = useColorScheme() === 'dark';
@@ -56,45 +60,71 @@ type SectionProps = PropsWithChildren<{
 //   );
 // }
 
+const resources: any = {
+  en: {translation: en},
+};
+
+i18.use(initReactI18next).init({
+  resources,
+  compatibilityJSON: 'v3',
+  lng: 'en',
+  fallbackLng: 'en',
+  debug: true,
+  interpolation: {
+    escapeValue: false,
+  },
+});
 function App(): React.JSX.Element {
   // const isDarkMode = useColorScheme() === 'dark';
 
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
+  const {t, i18n} = useTranslation();
 
+  useEffect(() => {
+    getStoredLanguage();
+  }, []);
+
+  const getStoredLanguage = async () => {
+    const storedLanguage = await AsyncStorage.getItem('currentLanguage');
+    console.log('storedLanguage=', storedLanguage);
+    i18n.changeLanguage(storedLanguage || 'en');
+  };
   return (
-    <SafeAreaView style={{flex: 1}}>
-      {/* <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView> */}
+    // <SafeAreaView style={{flex: 1}}>
+    // {/* <StatusBar
+    //   barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+    //   backgroundColor={backgroundStyle.backgroundColor}
+    // />
+    // <ScrollView
+    //   contentInsetAdjustmentBehavior="automatic"
+    //   style={backgroundStyle}>
+    //   <Header />
+    //   <View
+    //     style={{
+    //       backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    //     }}>
+    //     <Section title="Step One">
+    //       Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+    //       screen and then come back to see your edits.
+    //     </Section>
+    //     <Section title="See Your Changes">
+    //       <ReloadInstructions />
+    //     </Section>
+    //     <Section title="Debug">
+    //       <DebugInstructions />
+    //     </Section>
+    //     <Section title="Learn More">
+    //       Read the docs to discover what to do next:
+    //     </Section>
+    //     <LearnMoreLinks />
+    //   </View>
+    // </ScrollView> */}
+    <I18nextProvider i18n={i18}>
       <RootNavigation />
-    </SafeAreaView>
+    </I18nextProvider>
+    // {/* </SafeAreaView> */}
   );
 }
 

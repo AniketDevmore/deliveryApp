@@ -1,19 +1,15 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {useTranslation} from 'react-i18next';
 
 const UserLogin: React.FC = () => {
-  console.log('first-->>');
+  const {t} = useTranslation();
   return (
-    // <SafeAreaView
-    //   style={{
-    //     flex: 1,
-    //     backgroundColor: 'red',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     marginTop: 100,
-    //   }}>
-    <Text style={{color: '#000'}}>Login........................</Text>
-    // </SafeAreaView>
+    <SafeAreaView>
+      <TouchableOpacity>
+        <Text>Skip Login</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 
