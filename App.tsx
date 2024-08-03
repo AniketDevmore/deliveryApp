@@ -29,6 +29,7 @@ import i18 from 'i18next';
 import {initReactI18next, I18nextProvider, useTranslation} from 'react-i18next';
 import en from './src/shared/localization/en.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {DefaultTheme, PaperProvider} from 'react-native-paper';
 
 // type SectionProps = PropsWithChildren<{
 //   title: string;
@@ -121,9 +122,11 @@ function App(): React.JSX.Element {
     //     <LearnMoreLinks />
     //   </View>
     // </ScrollView> */}
-    <I18nextProvider i18n={i18}>
-      <RootNavigation />
-    </I18nextProvider>
+    <PaperProvider theme={DefaultTheme}>
+      <I18nextProvider i18n={i18}>
+        <RootNavigation />
+      </I18nextProvider>
+    </PaperProvider>
     // {/* </SafeAreaView> */}
   );
 }

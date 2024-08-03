@@ -4,7 +4,7 @@ const colorConst = require('../../assets/colorConstant/colors.json');
 const styles = StyleSheet.create({
   userLoginContainer: {
     flex: 1,
-    backgroundColor: colorConst.backroundWhite,
+    backgroundColor: colorConst.backgroundWhite,
   },
   topSliderContainer: {
     width: '100%',
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   skipLogin: {
-    backgroundColor: colorConst.backroundWhite,
+    backgroundColor: colorConst.backgroundWhite,
     width: 80,
     alignItems: 'center',
     justifyContent: 'center',
@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
     padding: 3,
     top: 20,
     left: '75%',
+    shadowColor: colorConst.shadowColor,
+    shadowOffset: {height: 10, width: 10},
+    shadowRadius: 10,
+    elevation: 8,
   },
   skipLoginText: {
     color: colorConst.textBlack,
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
   bottomLoginContainner: {
     width: '100%',
     height: '55%',
-    backgroundColor: colorConst.backroundWhite,
+    backgroundColor: colorConst.backgroundWhite,
     alignItems: 'center',
   },
   logoContainer: {
@@ -35,6 +39,10 @@ const styles = StyleSheet.create({
     height: 70,
     backgroundColor: '#ff9900',
     borderRadius: 20,
+    shadowColor: 'red',
+    shadowOffset: {height: 5, width: 5},
+    shadowRadius: 8,
+    elevation: 8,
   },
   loginText: {
     fontWeight: '600',
@@ -45,12 +53,15 @@ const styles = StyleSheet.create({
   bottomInnerContainer: {
     height: 150,
     width: 300,
-    borderWidth: 1,
-    borderColor: colorConst.borderColor,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colorConst.backgroundWhite,
     padding: 15,
+    shadowColor: colorConst.shadowColor,
+    shadowOffset: {height: 10, width: 10},
+    shadowRadius: 10,
+    elevation: 8,
   },
   inputStyle: {
     width: 180,
@@ -82,6 +93,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  termsText: {
+    fontSize: 11,
+    color: '#b3b3b3',
+  },
+  termsInnerText: {
+    color: '#4dff88',
   },
 });
 

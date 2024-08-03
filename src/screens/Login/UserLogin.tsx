@@ -8,9 +8,15 @@ import {
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import styles from './UserLogin.styles';
+import {useNavigation} from '@react-navigation/native';
 
 const UserLogin: React.FC = () => {
   const {t} = useTranslation();
+  const navigation: any = useNavigation();
+
+  const confirmOtpHandler = () => {
+    navigation.navigate('UserOtp');
+  };
   return (
     <SafeAreaView style={styles.userLoginContainer}>
       <View style={styles.topSliderContainer}>
@@ -28,14 +34,21 @@ const UserLogin: React.FC = () => {
             multiline={false}
             maxLength={10}
           />
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity
+            onPress={confirmOtpHandler}
+            style={styles.loginButton}>
             <Text style={styles.loginButtonText}>
               {t('userLogin.continue')}
             </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.privacyTab}>
-          <Text>aaaaaaaaaaaaaaaaaaaa</Text>
+          <Text style={styles.termsText}>
+            {t('userLogin.terms')}
+            <Text style={styles.termsInnerText}>
+              {t('userLogin.conditions')}
+            </Text>
+          </Text>
         </View>
       </View>
     </SafeAreaView>

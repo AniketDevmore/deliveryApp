@@ -1,8 +1,8 @@
 {
-  "backroundWhite": "#ffffff",
+  "backgroundWhite": "#ffffff",
   "textBlack": "#000000",
   "borderColor": "#a6a6a6",
-  "shadowColor": "#cccccc",
+  "shadowColor": "#000000",
   "redColor": "#ff6666",
   "textWhite": "#ffffff",
   "greenColor": "#009933"

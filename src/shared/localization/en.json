@@ -2,6 +2,8 @@
   "userLogin": {
     "skipLogin": "Skip Login",
     "loginText": "India's first agro app",
-    "continue": "Continue"
+    "continue": "Continue",
+    "terms": "By continuing, you agree to our ",
+    "conditions": "Terms of service & Provacy Policy"
   }
 }
