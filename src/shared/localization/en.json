@@ -4,6 +4,7 @@
     "loginText": "India's first agro app",
     "continue": "Continue",
     "terms": "By continuing, you agree to our ",
-    "conditions": "Terms of service & Provacy Policy"
+    "conditions": "Terms of service & Provacy Policy",
+    "sendOtp": "Send OTP"
   }
 }

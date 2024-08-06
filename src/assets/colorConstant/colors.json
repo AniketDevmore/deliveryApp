@@ -5,5 +5,8 @@
   "shadowColor": "#000000",
   "redColor": "#ff6666",
   "textWhite": "#ffffff",
-  "greenColor": "#009933"
+  "greenColor": "#009933",
+  "backgroundGray": "#f2f2f2",
+  "textGray": "#b3b3b3",
+  "lightGreen": "#4dff88"
 }
