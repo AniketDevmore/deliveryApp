@@ -38,7 +38,12 @@ const UserLogin: React.FC = () => {
     }
   };
 
-  const confirmOtpHandler = () => {
+  const onMobileNumberChange = (value: any) => {
+    setmobileNumber(value);
+     setIsOtpVisible(false)
+    }
+
+  const sendOtpHandler = () => {
     // navigation.navigate('UserOtp');
     setLoader(true);
     setTimeout(() => {
@@ -47,6 +52,10 @@ const UserLogin: React.FC = () => {
       setOtp(['1', '7', '3', '4', '5', '6']);
     }, 3000);
   };
+
+  const continueHandler = () => {
+    console.log('continue called')
+  }
   return (
     <SafeAreaView style={styles.userLoginContainer}>
       <View style={styles.topSliderContainer}>
@@ -64,34 +73,62 @@ const UserLogin: React.FC = () => {
             multiline={false}
             maxLength={10}
             value={mobileNumber}
-            onChangeText={(value: any) => setmobileNumber(value)}
+            onChangeText={(value: any) => onMobileNumberChange(value)}
           />
           <Text
-            style={[styles.countryCode, isOtpVisible ? {top: 25} : {top: 35}]}>
+            style={[
+              styles.countryCode,
+              isOtpVisible && mobileNumber.toString().length === 10
+                ? {top: 35}
+                : {top: 45},
+            ]}>
             +91
           </Text>
           <View style={styles.otpInputContainer}>
-            {isOtpVisible &&
-              otpInputs.map((_, index) => (
-                <TextInput
-                  key={index}
-                  style={styles.otpInputStyle}
-                  keyboardType="numeric"
-                  multiline={false}
-                  maxLength={1}
-                  value={otp[index]}
-                  onChangeText={value => handleInputChange(index, value)}
-                  ref={refs[index]}
-                />
-              ))}
+            {isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)
+              ? otpInputs.map((_, index) => (
+                  <TextInput
+                    key={index}
+                    style={styles.otpInputStyle}
+                    keyboardType="numeric"
+                    multiline={false}
+                    maxLength={1}
+                    editable={false}
+                    value={otp[index]}
+                    onChangeText={value => handleInputChange(index, value)}
+                    ref={refs[index]}
+                  />
+                ))
+              : null}
           </View>
           <Button
             mode="contained"
             loading={loader}
-            style={styles.loginButton}
-            buttonColor={colorConst.greenColor}
-            onPress={() => confirmOtpHandler()}>
-            {isOtpVisible ? t('userLogin.continue') : t('userLogin.sendOtp')}
+            disabled={
+              !isOtpVisible
+                ? (mobileNumber
+                  ? ( mobileNumber.toString().length === 10
+                    ? false
+                    : true)
+                  : true)
+                : (otp.length === 6
+                ? false
+                : true)
+            }
+            style={[
+              styles.loginButton,
+              !isOtpVisible
+                ? (mobileNumber
+                  ? (mobileNumber.toString().length === 10
+                    ? {backgroundColor: colorConst.greenColor}
+                    : {backgroundColor: colorConst.backgroundDisableGray})
+                  : {backgroundColor: colorConst.backgroundDisableGray})
+                : (otp.length === 6
+                ? {backgroundColor: colorConst.greenColor}
+                : {backgroundColor: colorConst.backgroundDisableGray}),
+            ]}
+            onPress={((isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? () => continueHandler() : () => sendOtpHandler())}>
+            {(isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? t('userLogin.continue') : t('userLogin.sendOtp')}
           </Button>
         </View>
         <View style={styles.privacyTab}>

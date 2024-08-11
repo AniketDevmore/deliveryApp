@@ -8,5 +8,6 @@
   "greenColor": "#009933",
   "backgroundGray": "#f2f2f2",
   "textGray": "#b3b3b3",
-  "lightGreen": "#4dff88"
+  "lightGreen": "#4dff88",
+  "backgroundDisableGray": "#e6e6e6"
 }

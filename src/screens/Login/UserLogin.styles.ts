@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colorConst.backgroundWhite,
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 25,
     shadowColor: colorConst.shadowColor,
     shadowOffset: {height: 10, width: 10},
     shadowRadius: 10,
@@ -96,7 +97,6 @@ const styles = StyleSheet.create({
     left: '28%',
   },
   loginButton: {
-    backgroundColor: colorConst.greenColor,
     paddingHorizontal: 10,
     borderRadius: 10,
     alignItems: 'center',
