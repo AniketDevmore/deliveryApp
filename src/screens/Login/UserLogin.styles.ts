@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   topSliderContainer: {
     width: '100%',
-    height: '45%',
+    height: '55%',
     backgroundColor: '#fff',
   },
   skipLogin: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   bottomLoginContainner: {
     width: '100%',
-    height: '55%',
+    height: '45%',
     backgroundColor: colorConst.backgroundWhite,
     alignItems: 'center',
   },

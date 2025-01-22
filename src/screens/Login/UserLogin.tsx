@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -6,18 +6,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import styles from './UserLogin.styles';
-import {useNavigation} from '@react-navigation/native';
-import {Button} from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native-paper';
+import ProductSlider from '../../components/Login/ProductSlider';
 const colorConst = require('../../assets/colorConstant/colors.json');
 
 const UserLogin: React.FC = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const navigation: any = useNavigation();
   let digitsArray = Array.from(String('123456'), digit => digit);
 
-  const otpInputs = Array.from({length: 6});
+  const otpInputs = Array.from({ length: 6 });
   const [loader, setLoader] = useState<boolean>(false);
   const [mobileNumber, setmobileNumber] = useState<any>();
   const [isOtpVisible, setIsOtpVisible] = useState<boolean>(false);
@@ -40,8 +41,8 @@ const UserLogin: React.FC = () => {
 
   const onMobileNumberChange = (value: any) => {
     setmobileNumber(value);
-     setIsOtpVisible(false)
-    }
+    setIsOtpVisible(false)
+  }
 
   const sendOtpHandler = () => {
     // navigation.navigate('UserOtp');
@@ -54,14 +55,18 @@ const UserLogin: React.FC = () => {
   };
 
   const continueHandler = () => {
-    console.log('continue called')
+    console.log('continue called');
+    if(otp.length === 6){
+      navigation.navigate('Home')
+    }
   }
   return (
     <SafeAreaView style={styles.userLoginContainer}>
       <View style={styles.topSliderContainer}>
-        <TouchableOpacity style={styles.skipLogin}>
+        {/* <TouchableOpacity style={styles.skipLogin}>
           <Text style={styles.skipLoginText}>{t('userLogin.skipLogin')}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <ProductSlider/>
       </View>
       <View style={styles.bottomLoginContainner}>
         <View style={styles.logoContainer}></View>
@@ -79,26 +84,26 @@ const UserLogin: React.FC = () => {
             style={[
               styles.countryCode,
               isOtpVisible && mobileNumber.toString().length === 10
-                ? {top: 35}
-                : {top: 45},
+                ? { top: 35 }
+                : { top: 35 },
             ]}>
             +91
           </Text>
           <View style={styles.otpInputContainer}>
             {isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)
               ? otpInputs.map((_, index) => (
-                  <TextInput
-                    key={index}
-                    style={styles.otpInputStyle}
-                    keyboardType="numeric"
-                    multiline={false}
-                    maxLength={1}
-                    editable={false}
-                    value={otp[index]}
-                    onChangeText={value => handleInputChange(index, value)}
-                    ref={refs[index]}
-                  />
-                ))
+                <TextInput
+                  key={index}
+                  style={styles.otpInputStyle}
+                  keyboardType="numeric"
+                  multiline={false}
+                  maxLength={1}
+                  editable={false}
+                  value={otp[index]}
+                  onChangeText={value => handleInputChange(index, value)}
+                  ref={refs[index]}
+                />
+              ))
               : null}
           </View>
           <Button
@@ -107,25 +112,25 @@ const UserLogin: React.FC = () => {
             disabled={
               !isOtpVisible
                 ? (mobileNumber
-                  ? ( mobileNumber.toString().length === 10
+                  ? (mobileNumber.toString().length === 10
                     ? false
                     : true)
                   : true)
                 : (otp.length === 6
-                ? false
-                : true)
+                  ? false
+                  : true)
             }
             style={[
               styles.loginButton,
               !isOtpVisible
                 ? (mobileNumber
                   ? (mobileNumber.toString().length === 10
-                    ? {backgroundColor: colorConst.greenColor}
-                    : {backgroundColor: colorConst.backgroundDisableGray})
-                  : {backgroundColor: colorConst.backgroundDisableGray})
+                    ? { backgroundColor: colorConst.greenColor }
+                    : { backgroundColor: colorConst.backgroundDisableGray })
+                  : { backgroundColor: colorConst.backgroundDisableGray })
                 : (otp.length === 6
-                ? {backgroundColor: colorConst.greenColor}
-                : {backgroundColor: colorConst.backgroundDisableGray}),
+                  ? { backgroundColor: colorConst.greenColor }
+                  : { backgroundColor: colorConst.backgroundDisableGray }),
             ]}
             onPress={((isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? () => continueHandler() : () => sendOtpHandler())}>
             {(isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? t('userLogin.continue') : t('userLogin.sendOtp')}

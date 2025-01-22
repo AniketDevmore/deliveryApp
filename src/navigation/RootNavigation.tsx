@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import UserLogin from '../screens/Login/UserLogin';
 import UserOtp from '../screens/UserOtp/UserOtp';
+import Home from '../screens/Home/Home';
 
 const RootNavigation: React.FC = () => {
   const Stack = createStackNavigator();
@@ -18,6 +19,11 @@ const RootNavigation: React.FC = () => {
         <Stack.Screen
           name="UserOtp"
           component={UserOtp}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

@@ -67,7 +67,7 @@ const resources: any = {
 
 i18.use(initReactI18next).init({
   resources,
-  compatibilityJSON: 'v3',
+  // compatibilityJSON: 'v3',
   lng: 'en',
   fallbackLng: 'en',
   debug: true,
