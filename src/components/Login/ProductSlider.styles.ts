@@ -11,7 +11,9 @@ export default () => {
     return StyleSheet.create<Styles>({
         container: {
             flex: 1,
-            backgroundColor: "#fff",
+            backgroundColor: "transparent",
+            zIndex: 0,
+            position: 'absolute'
         },
         rowContainer: {
             flexDirection: "row",

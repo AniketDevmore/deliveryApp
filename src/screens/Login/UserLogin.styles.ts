@@ -8,7 +8,10 @@ const styles = StyleSheet.create({
   },
   topSliderContainer: {
     width: '100%',
-    height: '55%',
+    // height: '55%',
+    position:'relative',
+    zIndex: 10,
+    height:  '100%',
     backgroundColor: '#fff',
   },
   skipLogin: {
@@ -30,9 +33,12 @@ const styles = StyleSheet.create({
   },
   bottomLoginContainner: {
     width: '100%',
-    height: '45%',
-    backgroundColor: colorConst.backgroundWhite,
+    height: '100%',
+    // backgroundColor: 'transparent',
     alignItems: 'center',
+    top: '52%',
+    zIndex: 10,
+    position: 'absolute'
   },
   logoContainer: {
     width: 70,
@@ -108,7 +114,8 @@ const styles = StyleSheet.create({
     height: 25,
     width: '100%',
     backgroundColor: colorConst.backgroundGray,
-    bottom: 0,
+    // bottom: 10,
+    top: '44%',
     alignItems: 'center',
     justifyContent: 'center',
   },

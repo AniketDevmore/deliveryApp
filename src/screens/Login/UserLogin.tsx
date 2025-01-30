@@ -11,6 +11,7 @@ import styles from './UserLogin.styles';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
 import ProductSlider from '../../components/Login/ProductSlider';
+import LinearGradient from 'react-native-linear-gradient';
 const colorConst = require('../../assets/colorConstant/colors.json');
 
 const UserLogin: React.FC = () => {
@@ -56,95 +57,101 @@ const UserLogin: React.FC = () => {
 
   const continueHandler = () => {
     console.log('continue called');
-    if(otp.length === 6){
+    if (otp.length === 6) {
       navigation.navigate('Home')
     }
   }
   return (
     <SafeAreaView style={styles.userLoginContainer}>
-      <View style={styles.topSliderContainer}>
-        {/* <TouchableOpacity style={styles.skipLogin}>
-          <Text style={styles.skipLoginText}>{t('userLogin.skipLogin')}</Text>
-        </TouchableOpacity> */}
-        <ProductSlider/>
-      </View>
-      <View style={styles.bottomLoginContainner}>
-        <View style={styles.logoContainer}></View>
-        <Text style={styles.loginText}>{t('userLogin.loginText')}</Text>
-        <View style={styles.bottomInnerContainer}>
-          <TextInput
-            style={styles.inputStyle}
-            keyboardType="numeric"
-            multiline={false}
-            maxLength={10}
-            value={mobileNumber}
-            onChangeText={(value: any) => onMobileNumberChange(value)}
-          />
-          <Text
-            style={[
-              styles.countryCode,
-              isOtpVisible && mobileNumber.toString().length === 10
-                ? { top: 35 }
-                : { top: 35 },
-            ]}>
-            +91
-          </Text>
-          <View style={styles.otpInputContainer}>
-            {isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)
-              ? otpInputs.map((_, index) => (
-                <TextInput
-                  key={index}
-                  style={styles.otpInputStyle}
-                  keyboardType="numeric"
-                  multiline={false}
-                  maxLength={1}
-                  editable={false}
-                  value={otp[index]}
-                  onChangeText={value => handleInputChange(index, value)}
-                  ref={refs[index]}
-                />
-              ))
-              : null}
-          </View>
-          <Button
-            mode="contained"
-            loading={loader}
-            disabled={
-              !isOtpVisible
-                ? (mobileNumber
-                  ? (mobileNumber.toString().length === 10
+      <LinearGradient colors={['transparent', 'rgba(254, 254, 254, 0.80)' ,'rgb(208, 208, 208)']} style={styles.topSliderContainer}>
+        <View style={{
+          position: 'absolute',
+          backgroundColor: 'transparent',
+          zIndex: -5
+        }}>
+          {/* <TouchableOpacity style={styles.skipLogin}>
+              <Text style={styles.skipLoginText}>{t('userLogin.skipLogin')}</Text>
+            </TouchableOpacity> */}
+          <ProductSlider />
+        </View>
+        <View style={styles.bottomLoginContainner}>
+          <View style={styles.logoContainer}></View>
+          <Text style={styles.loginText}>{t('userLogin.loginText')}</Text>
+          <View style={styles.bottomInnerContainer}>
+            <TextInput
+              style={styles.inputStyle}
+              keyboardType="numeric"
+              multiline={false}
+              maxLength={10}
+              value={mobileNumber}
+              onChangeText={(value: any) => onMobileNumberChange(value)}
+            />
+            <Text
+              style={[
+                styles.countryCode,
+                isOtpVisible && mobileNumber.toString().length === 10
+                  ? { top: 35 }
+                  : { top: 35 },
+              ]}>
+              +91
+            </Text>
+            <View style={styles.otpInputContainer}>
+              {isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)
+                ? otpInputs.map((_, index) => (
+                  <TextInput
+                    key={index}
+                    style={styles.otpInputStyle}
+                    keyboardType="numeric"
+                    multiline={false}
+                    maxLength={1}
+                    editable={false}
+                    value={otp[index]}
+                    onChangeText={value => handleInputChange(index, value)}
+                    ref={refs[index]}
+                  />
+                ))
+                : null}
+            </View>
+            <Button
+              mode="contained"
+              loading={loader}
+              disabled={
+                !isOtpVisible
+                  ? (mobileNumber
+                    ? (mobileNumber.toString().length === 10
+                      ? false
+                      : true)
+                    : true)
+                  : (otp.length === 6
                     ? false
                     : true)
-                  : true)
-                : (otp.length === 6
-                  ? false
-                  : true)
-            }
-            style={[
-              styles.loginButton,
-              !isOtpVisible
-                ? (mobileNumber
-                  ? (mobileNumber.toString().length === 10
-                    ? { backgroundColor: colorConst.greenColor }
+              }
+              style={[
+                styles.loginButton,
+                !isOtpVisible
+                  ? (mobileNumber
+                    ? (mobileNumber.toString().length === 10
+                      ? { backgroundColor: colorConst.greenColor }
+                      : { backgroundColor: colorConst.backgroundDisableGray })
                     : { backgroundColor: colorConst.backgroundDisableGray })
-                  : { backgroundColor: colorConst.backgroundDisableGray })
-                : (otp.length === 6
-                  ? { backgroundColor: colorConst.greenColor }
-                  : { backgroundColor: colorConst.backgroundDisableGray }),
-            ]}
-            onPress={((isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? () => continueHandler() : () => sendOtpHandler())}>
-            {(isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? t('userLogin.continue') : t('userLogin.sendOtp')}
-          </Button>
-        </View>
-        <View style={styles.privacyTab}>
-          <Text style={styles.termsText}>
-            {t('userLogin.terms')}
-            <Text style={styles.termsInnerText}>
-              {t('userLogin.conditions')}
+                  : (otp.length === 6
+                    ? { backgroundColor: colorConst.greenColor }
+                    : { backgroundColor: colorConst.backgroundDisableGray }),
+              ]}
+              onPress={((isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? () => continueHandler() : () => sendOtpHandler())}>
+              {(isOtpVisible && (mobileNumber && mobileNumber.toString().length === 10)) ? t('userLogin.continue') : t('userLogin.sendOtp')}
+            </Button>
+          </View>
+          <View style={styles.privacyTab}>
+            <Text style={styles.termsText}>
+              {t('userLogin.terms')}
+              <Text style={styles.termsInnerText}>
+                {t('userLogin.conditions')}
+              </Text>
             </Text>
-          </Text>
+          </View>
         </View>
-      </View>
+      </LinearGradient>
     </SafeAreaView>
   );
 };
