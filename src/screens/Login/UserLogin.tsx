@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
+  Keyboard,
   SafeAreaView,
   Text,
   TextInput,
@@ -24,6 +25,22 @@ const UserLogin: React.FC = () => {
   const [mobileNumber, setmobileNumber] = useState<any>();
   const [isOtpVisible, setIsOtpVisible] = useState<boolean>(false);
   const [otp, setOtp] = useState<string[]>([]);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", (event) => {
+      setKeyboardHeight(event.endCoordinates.height);
+    });
+
+    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardHeight(0);
+    });
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   //Reference of OTP input field to manage the index of OTP view
   const refs: any = otpInputs.reduce((acc: any, _, index: number) => {
@@ -64,11 +81,7 @@ const UserLogin: React.FC = () => {
   return (
     <SafeAreaView style={styles.userLoginContainer}>
       <LinearGradient colors={['transparent', 'rgba(254, 254, 254, 0.80)' ,'rgb(208, 208, 208)']} style={styles.topSliderContainer}>
-        <View style={{
-          position: 'absolute',
-          backgroundColor: 'transparent',
-          zIndex: -5
-        }}>
+        <View style={styles.upperView}>
           {/* <TouchableOpacity style={styles.skipLogin}>
               <Text style={styles.skipLoginText}>{t('userLogin.skipLogin')}</Text>
             </TouchableOpacity> */}

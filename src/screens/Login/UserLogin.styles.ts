@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colorConst.backgroundWhite,
   },
+  upperView: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    zIndex: -5
+  },
   topSliderContainer: {
     width: '100%',
     // height: '55%',
